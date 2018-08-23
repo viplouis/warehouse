@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.pro.mapper.good.InDepodMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.pro.po.good.InDepod" >
+    <id column="indepodid" property="indepodid" jdbcType="INTEGER" />
+    <result column="goodid" property="goodid" jdbcType="INTEGER" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="indepodtime" property="indepodtime" jdbcType="TIMESTAMP" />
+    <result column="buyer" property="buyer" jdbcType="VARCHAR" />
+    <result column="depodprincipal" property="depodprincipal" jdbcType="VARCHAR" />
+    <result column="spare1" property="spare1" jdbcType="TIMESTAMP" />
+    <result column="spare2" property="spare2" jdbcType="VARCHAR" />
+    <result column="spare3" property="spare3" jdbcType="VARCHAR" />
+    <result column="spare4" property="spare4" jdbcType="VARCHAR" />
+    <result column="spare5" property="spare5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    indepodid, goodid, unit, num, indepodtime, buyer, depodprincipal, spare1, spare2, 
+    spare3, spare4, spare5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.warehouse.pro.po.good.InDepodExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from in_depod
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from in_depod
+    where indepodid = #{indepodid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from in_depod
+    where indepodid = #{indepodid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.warehouse.pro.po.good.InDepodExample" >
+    delete from in_depod
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.warehouse.pro.po.good.InDepod" >
+    insert into in_depod (indepodid, goodid, unit, 
+      num, indepodtime, buyer, 
+      depodprincipal, spare1, spare2, 
+      spare3, spare4, spare5
+      )
+    values (#{indepodid,jdbcType=INTEGER}, #{goodid,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR}, 
+      #{num,jdbcType=INTEGER}, #{indepodtime,jdbcType=TIMESTAMP}, #{buyer,jdbcType=VARCHAR}, 
+      #{depodprincipal,jdbcType=VARCHAR}, #{spare1,jdbcType=TIMESTAMP}, #{spare2,jdbcType=VARCHAR}, 
+      #{spare3,jdbcType=VARCHAR}, #{spare4,jdbcType=VARCHAR}, #{spare5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.warehouse.pro.po.good.InDepod" >
+    insert into in_depod
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="indepodid != null" >
+        indepodid,
+      </if>
+      <if test="goodid != null" >
+        goodid,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="indepodtime != null" >
+        indepodtime,
+      </if>
+      <if test="buyer != null" >
+        buyer,
+      </if>
+      <if test="depodprincipal != null" >
+        depodprincipal,
+      </if>
+      <if test="spare1 != null" >
+        spare1,
+      </if>
+      <if test="spare2 != null" >
+        spare2,
+      </if>
+      <if test="spare3 != null" >
+        spare3,
+      </if>
+      <if test="spare4 != null" >
+        spare4,
+      </if>
+      <if test="spare5 != null" >
+        spare5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="indepodid != null" >
+        #{indepodid,jdbcType=INTEGER},
+      </if>
+      <if test="goodid != null" >
+        #{goodid,jdbcType=INTEGER},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="indepodtime != null" >
+        #{indepodtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyer != null" >
+        #{buyer,jdbcType=VARCHAR},
+      </if>
+      <if test="depodprincipal != null" >
+        #{depodprincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="spare1 != null" >
+        #{spare1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spare2 != null" >
+        #{spare2,jdbcType=VARCHAR},
+      </if>
+      <if test="spare3 != null" >
+        #{spare3,jdbcType=VARCHAR},
+      </if>
+      <if test="spare4 != null" >
+        #{spare4,jdbcType=VARCHAR},
+      </if>
+      <if test="spare5 != null" >
+        #{spare5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.warehouse.pro.po.good.InDepodExample" resultType="java.lang.Integer" >
+    select count(*) from in_depod
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update in_depod
+    <set >
+      <if test="record.indepodid != null" >
+        indepodid = #{record.indepodid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodid != null" >
+        goodid = #{record.goodid,jdbcType=INTEGER},
+      </if>
+      <if test="record.unit != null" >
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.num != null" >
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.indepodtime != null" >
+        indepodtime = #{record.indepodtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.buyer != null" >
+        buyer = #{record.buyer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depodprincipal != null" >
+        depodprincipal = #{record.depodprincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spare1 != null" >
+        spare1 = #{record.spare1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.spare2 != null" >
+        spare2 = #{record.spare2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spare3 != null" >
+        spare3 = #{record.spare3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spare4 != null" >
+        spare4 = #{record.spare4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spare5 != null" >
+        spare5 = #{record.spare5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update in_depod
+    set indepodid = #{record.indepodid,jdbcType=INTEGER},
+      goodid = #{record.goodid,jdbcType=INTEGER},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      num = #{record.num,jdbcType=INTEGER},
+      indepodtime = #{record.indepodtime,jdbcType=TIMESTAMP},
+      buyer = #{record.buyer,jdbcType=VARCHAR},
+      depodprincipal = #{record.depodprincipal,jdbcType=VARCHAR},
+      spare1 = #{record.spare1,jdbcType=TIMESTAMP},
+      spare2 = #{record.spare2,jdbcType=VARCHAR},
+      spare3 = #{record.spare3,jdbcType=VARCHAR},
+      spare4 = #{record.spare4,jdbcType=VARCHAR},
+      spare5 = #{record.spare5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.warehouse.pro.po.good.InDepod" >
+    update in_depod
+    <set >
+      <if test="goodid != null" >
+        goodid = #{goodid,jdbcType=INTEGER},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="indepodtime != null" >
+        indepodtime = #{indepodtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyer != null" >
+        buyer = #{buyer,jdbcType=VARCHAR},
+      </if>
+      <if test="depodprincipal != null" >
+        depodprincipal = #{depodprincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="spare1 != null" >
+        spare1 = #{spare1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spare2 != null" >
+        spare2 = #{spare2,jdbcType=VARCHAR},
+      </if>
+      <if test="spare3 != null" >
+        spare3 = #{spare3,jdbcType=VARCHAR},
+      </if>
+      <if test="spare4 != null" >
+        spare4 = #{spare4,jdbcType=VARCHAR},
+      </if>
+      <if test="spare5 != null" >
+        spare5 = #{spare5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where indepodid = #{indepodid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.warehouse.pro.po.good.InDepod" >
+    update in_depod
+    set goodid = #{goodid,jdbcType=INTEGER},
+      unit = #{unit,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      indepodtime = #{indepodtime,jdbcType=TIMESTAMP},
+      buyer = #{buyer,jdbcType=VARCHAR},
+      depodprincipal = #{depodprincipal,jdbcType=VARCHAR},
+      spare1 = #{spare1,jdbcType=TIMESTAMP},
+      spare2 = #{spare2,jdbcType=VARCHAR},
+      spare3 = #{spare3,jdbcType=VARCHAR},
+      spare4 = #{spare4,jdbcType=VARCHAR},
+      spare5 = #{spare5,jdbcType=VARCHAR}
+    where indepodid = #{indepodid,jdbcType=INTEGER}
+  </update>
+</mapper>

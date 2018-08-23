@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.pro.mapper.depod.DepodMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.pro.po.depod.Depod" >
+    <id column="depodid" property="depodid" jdbcType="INTEGER" />
+    <result column="depodnum" property="depodnum" jdbcType="VARCHAR" />
+    <result column="depodname" property="depodname" jdbcType="VARCHAR" />
+    <result column="depodaddress" property="depodaddress" jdbcType="VARCHAR" />
+    <result column="storigetype" property="storigetype" jdbcType="VARCHAR" />
+    <result column="principal" property="principal" jdbcType="VARCHAR" />
+    <result column="telphone" property="telphone" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="spare1" property="spare1" jdbcType="VARCHAR" />
+    <result column="spare2" property="spare2" jdbcType="VARCHAR" />
+    <result column="spare3" property="spare3" jdbcType="VARCHAR" />
+    <result column="spare4" property="spare4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    depodid, depodnum, depodname, depodaddress, storigetype, principal, telphone, createtime, 
+    spare1, spare2, spare3, spare4
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.warehouse.pro.po.depod.DepodExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from depod
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from depod
+    where depodid = #{depodid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    update depod
+    set spare1 = '1'
+    where depodid = #{depodid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.warehouse.pro.po.depod.DepodExample" >
+    delete from depod
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.warehouse.pro.po.depod.Depod" >
+    insert into depod (depodid, depodnum, depodname, 
+      depodaddress, storigetype, principal, 
+      telphone, createtime, spare1, 
+      spare2, spare3, spare4
+      )
+    values (#{depodid,jdbcType=INTEGER}, #{depodnum,jdbcType=VARCHAR}, #{depodname,jdbcType=VARCHAR}, 
+      #{depodaddress,jdbcType=VARCHAR}, #{storigetype,jdbcType=VARCHAR}, #{principal,jdbcType=VARCHAR}, 
+      #{telphone,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{spare1,jdbcType=VARCHAR}, 
+      #{spare2,jdbcType=VARCHAR}, #{spare3,jdbcType=VARCHAR}, #{spare4,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.warehouse.pro.po.depod.Depod" >
+    insert into depod
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="depodid != null" >
+        depodid,
+      </if>
+      <if test="depodnum != null" >
+        depodnum,
+      </if>
+      <if test="depodname != null" >
+        depodname,
+      </if>
+      <if test="depodaddress != null" >
+        depodaddress,
+      </if>
+      <if test="storigetype != null" >
+        storigetype,
+      </if>
+      <if test="principal != null" >
+        principal,
+      </if>
+      <if test="telphone != null" >
+        telphone,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="spare1 != null" >
+        spare1,
+      </if>
+      <if test="spare2 != null" >
+        spare2,
+      </if>
+      <if test="spare3 != null" >
+        spare3,
+      </if>
+      <if test="spare4 != null" >
+        spare4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="depodid != null" >
+        #{depodid,jdbcType=INTEGER},
+      </if>
+      <if test="depodnum != null" >
+        #{depodnum,jdbcType=VARCHAR},
+      </if>
+      <if test="depodname != null" >
+        #{depodname,jdbcType=VARCHAR},
+      </if>
+      <if test="depodaddress != null" >
+        #{depodaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="storigetype != null" >
+        #{storigetype,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null" >
+        #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null" >
+        #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spare1 != null" >
+        #{spare1,jdbcType=VARCHAR},
+      </if>
+      <if test="spare2 != null" >
+        #{spare2,jdbcType=VARCHAR},
+      </if>
+      <if test="spare3 != null" >
+        #{spare3,jdbcType=VARCHAR},
+      </if>
+      <if test="spare4 != null" >
+        #{spare4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.warehouse.pro.po.depod.DepodExample" resultType="java.lang.Integer" >
+    select count(*) from depod
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update depod
+    <set >
+      <if test="record.depodid != null" >
+        depodid = #{record.depodid,jdbcType=INTEGER},
+      </if>
+      <if test="record.depodnum != null" >
+        depodnum = #{record.depodnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depodname != null" >
+        depodname = #{record.depodname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depodaddress != null" >
+        depodaddress = #{record.depodaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storigetype != null" >
+        storigetype = #{record.storigetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.principal != null" >
+        principal = #{record.principal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telphone != null" >
+        telphone = #{record.telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.spare1 != null" >
+        spare1 = #{record.spare1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spare2 != null" >
+        spare2 = #{record.spare2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spare3 != null" >
+        spare3 = #{record.spare3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spare4 != null" >
+        spare4 = #{record.spare4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update depod
+    set depodid = #{record.depodid,jdbcType=INTEGER},
+      depodnum = #{record.depodnum,jdbcType=VARCHAR},
+      depodname = #{record.depodname,jdbcType=VARCHAR},
+      depodaddress = #{record.depodaddress,jdbcType=VARCHAR},
+      storigetype = #{record.storigetype,jdbcType=VARCHAR},
+      principal = #{record.principal,jdbcType=VARCHAR},
+      telphone = #{record.telphone,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      spare1 = #{record.spare1,jdbcType=VARCHAR},
+      spare2 = #{record.spare2,jdbcType=VARCHAR},
+      spare3 = #{record.spare3,jdbcType=VARCHAR},
+      spare4 = #{record.spare4,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.warehouse.pro.po.depod.Depod" >
+    update depod
+    <set >
+      <if test="depodnum != null" >
+        depodnum = #{depodnum,jdbcType=VARCHAR},
+      </if>
+      <if test="depodname != null" >
+        depodname = #{depodname,jdbcType=VARCHAR},
+      </if>
+      <if test="depodaddress != null" >
+        depodaddress = #{depodaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="storigetype != null" >
+        storigetype = #{storigetype,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null" >
+        principal = #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null" >
+        telphone = #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spare1 != null" >
+        spare1 = #{spare1,jdbcType=VARCHAR},
+      </if>
+      <if test="spare2 != null" >
+        spare2 = #{spare2,jdbcType=VARCHAR},
+      </if>
+      <if test="spare3 != null" >
+        spare3 = #{spare3,jdbcType=VARCHAR},
+      </if>
+      <if test="spare4 != null" >
+        spare4 = #{spare4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where depodid = #{depodid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.warehouse.pro.po.depod.Depod" >
+    update depod
+    set depodnum = #{depodnum,jdbcType=VARCHAR},
+      depodname = #{depodname,jdbcType=VARCHAR},
+      depodaddress = #{depodaddress,jdbcType=VARCHAR},
+      storigetype = #{storigetype,jdbcType=VARCHAR},
+      principal = #{principal,jdbcType=VARCHAR},
+      telphone = #{telphone,jdbcType=VARCHAR},
+      spare2 = #{spare2,jdbcType=VARCHAR},
+      spare3 = #{spare3,jdbcType=VARCHAR},
+      spare4 = #{spare4,jdbcType=VARCHAR}
+    where depodid = #{depodid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.pro.mapper.oil.OilMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.pro.po.oil.Oil" >
+    <id column="oil_id" property="oilId" jdbcType="INTEGER" />
+    <result column="oil_card" property="oilCard" jdbcType="VARCHAR" />
+    <result column="oil_address" property="oilAddress" jdbcType="VARCHAR" />
+    <result column="oil_licence" property="oilLicence" jdbcType="VARCHAR" />
+    <result column="oil_money" property="oilMoney" jdbcType="DOUBLE" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="oil_user" property="oilUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    oil_id, oil_card, oil_address, oil_licence, oil_money, time, oil_user
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.warehouse.pro.po.oil.OilExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from oil
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from oil
+    where oil_id = #{oilId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from oil
+    where oil_id = #{oilId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.warehouse.pro.po.oil.OilExample" >
+    delete from oil
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.warehouse.pro.po.oil.Oil" >
+    insert into oil (oil_id, oil_card, oil_address, 
+      oil_licence, oil_money, time, 
+      oil_user)
+    values (#{oilId,jdbcType=INTEGER}, #{oilCard,jdbcType=VARCHAR}, #{oilAddress,jdbcType=VARCHAR}, 
+      #{oilLicence,jdbcType=VARCHAR}, #{oilMoney,jdbcType=DOUBLE}, #{time,jdbcType=TIMESTAMP}, 
+      #{oilUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.warehouse.pro.po.oil.Oil" >
+    insert into oil
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oilId != null" >
+        oil_id,
+      </if>
+      <if test="oilCard != null" >
+        oil_card,
+      </if>
+      <if test="oilAddress != null" >
+        oil_address,
+      </if>
+      <if test="oilLicence != null" >
+        oil_licence,
+      </if>
+      <if test="oilMoney != null" >
+        oil_money,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="oilUser != null" >
+        oil_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oilId != null" >
+        #{oilId,jdbcType=INTEGER},
+      </if>
+      <if test="oilCard != null" >
+        #{oilCard,jdbcType=VARCHAR},
+      </if>
+      <if test="oilAddress != null" >
+        #{oilAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="oilLicence != null" >
+        #{oilLicence,jdbcType=VARCHAR},
+      </if>
+      <if test="oilMoney != null" >
+        #{oilMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oilUser != null" >
+        #{oilUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.warehouse.pro.po.oil.OilExample" resultType="java.lang.Integer" >
+    select count(*) from oil
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update oil
+    <set >
+      <if test="record.oilId != null" >
+        oil_id = #{record.oilId,jdbcType=INTEGER},
+      </if>
+      <if test="record.oilCard != null" >
+        oil_card = #{record.oilCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oilAddress != null" >
+        oil_address = #{record.oilAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oilLicence != null" >
+        oil_licence = #{record.oilLicence,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oilMoney != null" >
+        oil_money = #{record.oilMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.oilUser != null" >
+        oil_user = #{record.oilUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update oil
+    set oil_id = #{record.oilId,jdbcType=INTEGER},
+      oil_card = #{record.oilCard,jdbcType=VARCHAR},
+      oil_address = #{record.oilAddress,jdbcType=VARCHAR},
+      oil_licence = #{record.oilLicence,jdbcType=VARCHAR},
+      oil_money = #{record.oilMoney,jdbcType=DOUBLE},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      oil_user = #{record.oilUser,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.warehouse.pro.po.oil.Oil" >
+    update oil
+    <set >
+      <if test="oilCard != null" >
+        oil_card = #{oilCard,jdbcType=VARCHAR},
+      </if>
+      <if test="oilAddress != null" >
+        oil_address = #{oilAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="oilLicence != null" >
+        oil_licence = #{oilLicence,jdbcType=VARCHAR},
+      </if>
+      <if test="oilMoney != null" >
+        oil_money = #{oilMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oilUser != null" >
+        oil_user = #{oilUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where oil_id = #{oilId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.warehouse.pro.po.oil.Oil" >
+    update oil
+    set oil_card = #{oilCard,jdbcType=VARCHAR},
+      oil_address = #{oilAddress,jdbcType=VARCHAR},
+      oil_licence = #{oilLicence,jdbcType=VARCHAR},
+      oil_money = #{oilMoney,jdbcType=DOUBLE},
+      time = #{time,jdbcType=TIMESTAMP},
+      oil_user = #{oilUser,jdbcType=VARCHAR}
+    where oil_id = #{oilId,jdbcType=INTEGER}
+  </update>
+</mapper>

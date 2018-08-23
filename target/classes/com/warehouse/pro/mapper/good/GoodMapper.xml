@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.warehouse.pro.mapper.good.GoodMapper" >
+  <resultMap id="BaseResultMap" type="com.warehouse.pro.po.good.Good" >
+    <id column="goodid" property="goodid" jdbcType="INTEGER" />
+    <result column="goodnum" property="goodnum" jdbcType="VARCHAR" />
+    <result column="goodname" property="goodname" jdbcType="VARCHAR" />
+    <result column="goodmodel" property="goodmodel" jdbcType="VARCHAR" />
+    <result column="goodproducer" property="goodproducer" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="stock" property="stock" jdbcType="INTEGER" />
+    <result column="warning" property="warning" jdbcType="INTEGER" />
+    <result column="depodid" property="depodid" jdbcType="INTEGER" />
+    <result column="depodnum" property="depodnum" jdbcType="VARCHAR" />
+    <result column="spare1" property="spare1" jdbcType="VARCHAR" />
+    <result column="spare2" property="spare2" jdbcType="VARCHAR" />
+    <result column="spare3" property="spare3" jdbcType="VARCHAR" />
+    <result column="spare4" property="spare4" jdbcType="VARCHAR" />
+    <result column="spare5" property="spare5" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.warehouse.pro.po.good.Good" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    goodid, goodnum, goodname, goodmodel, goodproducer, unit, price, stock, warning, 
+    depodid, depodnum, spare1, spare2, spare3, spare4, spare5
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.warehouse.pro.po.good.GoodExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from good
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.warehouse.pro.po.good.GoodExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from good
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExamplezdygood" resultMap="BaseResultMap" parameterType="com.warehouse.pro.po.good.GoodExample" >
+    select distinct  goodname  from good
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleQuq" resultMap="BaseResultMap" parameterType="com.warehouse.pro.po.good.GoodExample" >
+    select
+      distinct
+      goodid, goodname
+    from good
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from good
+    where goodid = #{goodid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByGood" resultMap="BaseResultMap" parameterType="com.warehouse.pro.po.good.Good" >
+    select 
+    <include refid="Base_Column_List" />
+    from good
+    where goodname = #{goodname,jdbcType=VARCHAR} and goodmodel = #{goodmodel,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    update good set spare1 = '1'
+    where goodid = #{goodid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.warehouse.pro.po.good.GoodExample" >
+    delete from good
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.warehouse.pro.po.good.Good" >
+    insert into good (goodid, goodnum, goodname, 
+      goodmodel, goodproducer, unit, 
+      price, stock, warning, 
+      depodid, depodnum, spare1, 
+      spare2, spare3, spare4, 
+      spare5, remark)
+    values (#{goodid,jdbcType=INTEGER}, #{goodnum,jdbcType=VARCHAR}, #{goodname,jdbcType=VARCHAR}, 
+      #{goodmodel,jdbcType=VARCHAR}, #{goodproducer,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{stock,jdbcType=INTEGER}, #{warning,jdbcType=INTEGER}, 
+      #{depodid,jdbcType=INTEGER}, #{depodnum,jdbcType=VARCHAR}, #{spare1,jdbcType=VARCHAR}, 
+      #{spare2,jdbcType=VARCHAR}, #{spare3,jdbcType=VARCHAR}, #{spare4,jdbcType=VARCHAR}, 
+      #{spare5,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.warehouse.pro.po.good.Good" useGeneratedKeys="true" keyProperty="goodid">
+    insert into good
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodid != null" >
+        goodid,
+      </if>
+      <if test="goodnum != null" >
+        goodnum,
+      </if>
+      <if test="goodname != null" >
+        goodname,
+      </if>
+      <if test="goodmodel != null" >
+        goodmodel,
+      </if>
+      <if test="goodproducer != null" >
+        goodproducer,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="stock != null" >
+        stock,
+      </if>
+      <if test="warning != null" >
+        warning,
+      </if>
+      <if test="depodid != null" >
+        depodid,
+      </if>
+      <if test="depodnum != null" >
+        depodnum,
+      </if>
+      <if test="spare1 != null" >
+        spare1,
+      </if>
+      <if test="spare2 != null" >
+        spare2,
+      </if>
+      <if test="spare3 != null" >
+        spare3,
+      </if>
+      <if test="spare4 != null" >
+        spare4,
+      </if>
+      <if test="spare5 != null" >
+        spare5,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodid != null" >
+        #{goodid,jdbcType=INTEGER},
+      </if>
+      <if test="goodnum != null" >
+        #{goodnum,jdbcType=VARCHAR},
+      </if>
+      <if test="goodname != null" >
+        #{goodname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodmodel != null" >
+        #{goodmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="goodproducer != null" >
+        #{goodproducer,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="stock != null" >
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="warning != null" >
+        #{warning,jdbcType=INTEGER},
+      </if>
+      <if test="depodid != null" >
+        #{depodid,jdbcType=INTEGER},
+      </if>
+      <if test="depodnum != null" >
+        #{depodnum,jdbcType=VARCHAR},
+      </if>
+      <if test="spare1 != null" >
+        #{spare1,jdbcType=VARCHAR},
+      </if>
+      <if test="spare2 != null" >
+        #{spare2,jdbcType=VARCHAR},
+      </if>
+      <if test="spare3 != null" >
+        #{spare3,jdbcType=VARCHAR},
+      </if>
+      <if test="spare4 != null" >
+        #{spare4,jdbcType=VARCHAR},
+      </if>
+      <if test="spare5 != null" >
+        #{spare5,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+    <selectKey resultType="java.lang.Integer" order="AFTER"
+		keyProperty="goodid">
+		SELECT LAST_INSERT_ID()
+	</selectKey>
+  </insert>
+  <select id="countByExample" parameterType="com.warehouse.pro.po.good.GoodExample" resultType="java.lang.Integer" >
+    select count(*) from good
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update good
+    <set >
+      <if test="record.goodid != null" >
+        goodid = #{record.goodid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodnum != null" >
+        goodnum = #{record.goodnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodname != null" >
+        goodname = #{record.goodname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodmodel != null" >
+        goodmodel = #{record.goodmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodproducer != null" >
+        goodproducer = #{record.goodproducer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null" >
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.stock != null" >
+        stock = #{record.stock,jdbcType=INTEGER},
+      </if>
+      <if test="record.warning != null" >
+        warning = #{record.warning,jdbcType=INTEGER},
+      </if>
+      <if test="record.depodid != null" >
+        depodid = #{record.depodid,jdbcType=INTEGER},
+      </if>
+      <if test="record.depodnum != null" >
+        depodnum = #{record.depodnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spare1 != null" >
+        spare1 = #{record.spare1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spare2 != null" >
+        spare2 = #{record.spare2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spare3 != null" >
+        spare3 = #{record.spare3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spare4 != null" >
+        spare4 = #{record.spare4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spare5 != null" >
+        spare5 = #{record.spare5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update good
+    set goodid = #{record.goodid,jdbcType=INTEGER},
+      goodnum = #{record.goodnum,jdbcType=VARCHAR},
+      goodname = #{record.goodname,jdbcType=VARCHAR},
+      goodmodel = #{record.goodmodel,jdbcType=VARCHAR},
+      goodproducer = #{record.goodproducer,jdbcType=VARCHAR},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DECIMAL},
+      stock = #{record.stock,jdbcType=INTEGER},
+      warning = #{record.warning,jdbcType=INTEGER},
+      depodid = #{record.depodid,jdbcType=INTEGER},
+      depodnum = #{record.depodnum,jdbcType=VARCHAR},
+      spare1 = #{record.spare1,jdbcType=VARCHAR},
+      spare2 = #{record.spare2,jdbcType=VARCHAR},
+      spare3 = #{record.spare3,jdbcType=VARCHAR},
+      spare4 = #{record.spare4,jdbcType=VARCHAR},
+      spare5 = #{record.spare5,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update good
+    set goodid = #{record.goodid,jdbcType=INTEGER},
+      goodnum = #{record.goodnum,jdbcType=VARCHAR},
+      goodname = #{record.goodname,jdbcType=VARCHAR},
+      goodmodel = #{record.goodmodel,jdbcType=VARCHAR},
+      goodproducer = #{record.goodproducer,jdbcType=VARCHAR},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DECIMAL},
+      stock = #{record.stock,jdbcType=INTEGER},
+      warning = #{record.warning,jdbcType=INTEGER},
+      depodid = #{record.depodid,jdbcType=INTEGER},
+      depodnum = #{record.depodnum,jdbcType=VARCHAR},
+      spare1 = #{record.spare1,jdbcType=VARCHAR},
+      spare2 = #{record.spare2,jdbcType=VARCHAR},
+      spare3 = #{record.spare3,jdbcType=VARCHAR},
+      spare4 = #{record.spare4,jdbcType=VARCHAR},
+      spare5 = #{record.spare5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.warehouse.pro.po.good.Good" >
+    update good
+    <set >
+      <if test="goodnum != null" >
+        goodnum = #{goodnum,jdbcType=VARCHAR},
+      </if>
+      <if test="goodname != null" >
+        goodname = #{goodname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodmodel != null" >
+        goodmodel = #{goodmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="goodproducer != null" >
+        goodproducer = #{goodproducer,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="stock != null" >
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="warning != null" >
+        warning = #{warning,jdbcType=INTEGER},
+      </if>
+      <if test="depodid != null" >
+        depodid = #{depodid,jdbcType=INTEGER},
+      </if>
+      <if test="depodnum != null" >
+        depodnum = #{depodnum,jdbcType=VARCHAR},
+      </if>
+      <if test="spare1 != null" >
+        spare1 = #{spare1,jdbcType=VARCHAR},
+      </if>
+      <if test="spare2 != null" >
+        spare2 = #{spare2,jdbcType=VARCHAR},
+      </if>
+      <if test="spare3 != null" >
+        spare3 = #{spare3,jdbcType=VARCHAR},
+      </if>
+      <if test="spare4 != null" >
+        spare4 = #{spare4,jdbcType=VARCHAR},
+      </if>
+      <if test="spare5 != null" >
+        spare5 = #{spare5,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where goodid = #{goodid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.warehouse.pro.po.good.Good" >
+    update good
+    set goodnum = #{goodnum,jdbcType=VARCHAR},
+      goodname = #{goodname,jdbcType=VARCHAR},
+      goodmodel = #{goodmodel,jdbcType=VARCHAR},
+      goodproducer = #{goodproducer,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      stock = #{stock,jdbcType=INTEGER},
+      warning = #{warning,jdbcType=INTEGER},
+      depodid = #{depodid,jdbcType=INTEGER},
+      depodnum = #{depodnum,jdbcType=VARCHAR},
+      spare1 = #{spare1,jdbcType=VARCHAR},
+      spare2 = #{spare2,jdbcType=VARCHAR},
+      spare3 = #{spare3,jdbcType=VARCHAR},
+      spare4 = #{spare4,jdbcType=VARCHAR},
+      spare5 = #{spare5,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where goodid = #{goodid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.warehouse.pro.po.good.Good" >
+    update good
+    set goodnum = #{goodnum,jdbcType=VARCHAR},
+      goodname = #{goodname,jdbcType=VARCHAR},
+      goodmodel = #{goodmodel,jdbcType=VARCHAR},
+      goodproducer = #{goodproducer,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      stock = #{stock,jdbcType=INTEGER},
+      warning = #{warning,jdbcType=INTEGER},
+      depodid = #{depodid,jdbcType=INTEGER},
+      depodnum = #{depodnum,jdbcType=VARCHAR},
+      spare1 = #{spare1,jdbcType=VARCHAR},
+      spare2 = #{spare2,jdbcType=VARCHAR},
+      spare3 = #{spare3,jdbcType=VARCHAR},
+      spare4 = #{spare4,jdbcType=VARCHAR},
+      spare5 = #{spare5,jdbcType=VARCHAR}
+    where goodid = #{goodid,jdbcType=INTEGER}
+  </update>
+</mapper>
